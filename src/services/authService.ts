@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { CreateDataUser } from "../interfaces/createData.js";
+import { CreateDataTest, CreateDataUser } from "../interfaces/createData.js";
 import { authRepository } from "../repositories/authRepository.js";
 
 
@@ -26,7 +26,31 @@ async function signUp(userData: CreateDataUser) {
     await authRepository.createUser(userData)
 }
 
+async function signIn(userData: CreateDataUser) {
+    
+    const user = await authRepository.checkRegisteredEmails(userData);
+    if(!user){
+        throw {
+            type:"not_found",
+            message: "User not registered!"
+        }
+    }
+
+    if(!(bcrypt.compareSync(userData.password, user.password))){
+        throw {
+            type: "unauthorized",
+            message: "Incorrect "
+        }
+    }
+
+    const secretKey = process.env.JWT_SECRET_KEY;
+    const token = jwt.sign({id: user.id, email: user.email}, secretKey);
+
+    return token;
+}
+
 
 export const authService = {
-    signUp
+    signUp, 
+    signIn
 }
