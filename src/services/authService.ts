@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { CreateDataTest, CreateDataUser } from "../interfaces/createData.js";
+import { CreateDataUser } from "../interfaces/createData.js";
 import { authRepository } from "../repositories/authRepository.js";
 
 
