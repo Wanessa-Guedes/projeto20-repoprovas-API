@@ -39,7 +39,7 @@ async function signIn(userData: CreateDataUser) {
     if(!(bcrypt.compareSync(userData.password, user.password))){
         throw {
             type: "unauthorized",
-            message: "Incorrect "
+            message: "Incorrect password"
         }
     }
 
