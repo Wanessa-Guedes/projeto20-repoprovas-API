@@ -47,8 +47,14 @@ async function getTestByInstructor(){
     return tests
 }
 
+async function getAllTests() {
+    const tests = await testsRepository.getAllTests();
+    return tests
+}
+
 export const testService = {
     createTest,
     getTestByDiscipline,
-    getTestByInstructor
+    getTestByInstructor,
+    getAllTests
 }

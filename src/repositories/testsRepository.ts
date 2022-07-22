@@ -75,9 +75,31 @@ async function getTestByInstructor() {
     return tests
 }
 
+async function  getAllTests() {
+    const tests = await prisma.test.findMany({
+        include: {
+            teacherDiscipline: {
+                include: {
+                    teacher: true,
+                    discipline: {
+                        include: {
+                            terms: {}
+                        }
+                    }
+                }
+            },
+            category: true
+        }
+    })
+
+    return tests
+    
+}
+
 
 export const testsRepository = {
     creatTestData,
     getTestByDiscipline,
-    getTestByInstructor
+    getTestByInstructor,
+    getAllTests
 }

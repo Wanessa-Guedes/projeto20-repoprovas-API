@@ -11,7 +11,22 @@ export async function createTest(req: Request, res: Response){
     res.sendStatus(201)
 }
 
-export async function getTestByDiscipline(req: Request, res: Response){
-    const tests = await testService.getTestByDiscipline();
-    res.send(tests).status(200)
+export async function getTests(req: Request, res: Response){
+
+    const group: any = req.query.groupBy; 
+    console.log(group)
+    
+    if(group === "disciplines"){
+        const tests = await testService.getTestByDiscipline();
+        return res.send({tests}).status(200)
+    }
+
+    if(group === "teachers"){
+        const tests = await testService.getTestByInstructor();
+        return res.send({tests}).status(200)
+    }
+
+    const tests = await testService.getAllTests();
+    return res.send({tests}).status(200)
+
 }
