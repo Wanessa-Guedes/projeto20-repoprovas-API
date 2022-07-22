@@ -38,10 +38,17 @@ async function createTest(testInfo: CreateDataTest){
 }
 
 async function getTestByDiscipline(){
+    const tests = await testsRepository.getTestByDiscipline();
+    return tests
+}
 
+async function getTestByInstructor(){
+    const tests = await testsRepository.getTestByInstructor();
+    return tests
 }
 
 export const testService = {
     createTest,
-    getTestByDiscipline
+    getTestByDiscipline,
+    getTestByInstructor
 }
