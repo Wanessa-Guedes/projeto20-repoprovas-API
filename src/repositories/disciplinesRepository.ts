@@ -8,6 +8,24 @@ async function findDisciplineById(disciplineId: number){
     return discipline
 }
 
+/* async function separeteTestByTerm(){
+    const tests = await prisma.term.findMany({
+        include: {
+            disciplines: {
+                include: {
+                    teacherDiscipline: {
+                        include: {
+                            tests: {
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+} */
+
 export const disciplinesRepository = {
     findDisciplineById
 }

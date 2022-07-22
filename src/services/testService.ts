@@ -37,7 +37,11 @@ async function createTest(testInfo: CreateDataTest){
 
 }
 
+async function getTestByDiscipline(){
+
+}
 
 export const testService = {
-    createTest
+    createTest,
+    getTestByDiscipline
 }
