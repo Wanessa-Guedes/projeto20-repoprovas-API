@@ -8,6 +8,13 @@ async function findCategoryById(categoryId: number) {
     return category
 }
 
+async function findCategories() {
+    const categories = await prisma.category.findMany();
+
+    return categories
+}
+
 export const categoryRepository = {
-    findCategoryById
+    findCategoryById,
+    findCategories
 }
