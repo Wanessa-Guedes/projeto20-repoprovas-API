@@ -10,7 +10,7 @@ export function errorHanddlingMiddleware(err, req: Request, res: Response, next:
         return res.status(422).send(`${err.message}`);
     }
 
-    return res.sendStatus(500);
+    res.status(500).send(`${err.message}`);
 }
 
 function errorTypeToStatusCode(errorType: string) {
