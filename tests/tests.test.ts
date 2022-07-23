@@ -161,6 +161,52 @@ describe("Tests tests", () => {
         const responseTests = await supertest(app).get("/tests?groupBy=teachers").send(testsData)
         expect(responseTests.status).toBe(401);
     })
+
+    it("get categories - success", async () => {
+        const userData = authFactory.createSignUp();
+        const result = await supertest(app).post('/sign-up').send(userData);
+        delete userData.passwordConfirmation;
+        const responseAuth = await supertest(app).post("/sign-in").send(userData);
+        const token = responseAuth.body.token;
+        const testsData = testsFactory.createTestData();
+        const responseTests = await supertest(app).get("/categories").send(testsData).set("Authorization", `Bearer ${token}`)
+        expect(responseTests).not.toBeNull();
+        expect(responseTests.status).toBe(200);
+    })
+
+    it("get categories - FAIL - Miss Token", async () => {
+        const userData = authFactory.createSignUp();
+        const result = await supertest(app).post('/sign-up').send(userData);
+        delete userData.passwordConfirmation;
+        const responseAuth = await supertest(app).post("/sign-in").send(userData);
+        const token = responseAuth.body.token;
+        const testsData = testsFactory.createTestData();
+        const responseTests = await supertest(app).get("/categories").send(testsData)
+        expect(responseTests.status).toBe(401);
+    })
+
+    it("get all tests - success", async () => {
+        const userData = authFactory.createSignUp();
+        const result = await supertest(app).post('/sign-up').send(userData);
+        delete userData.passwordConfirmation;
+        const responseAuth = await supertest(app).post("/sign-in").send(userData);
+        const token = responseAuth.body.token;
+        const testsData = testsFactory.createTestData();
+        const responseTests = await supertest(app).get("/tests").send(testsData).set("Authorization", `Bearer ${token}`)
+        expect(responseTests).not.toBeNull();
+        expect(responseTests.status).toBe(200);
+    })
+
+    it("get all tests - FAIL - Miss Token", async () => {
+        const userData = authFactory.createSignUp();
+        const result = await supertest(app).post('/sign-up').send(userData);
+        delete userData.passwordConfirmation;
+        const responseAuth = await supertest(app).post("/sign-in").send(userData);
+        const token = responseAuth.body.token;
+        const testsData = testsFactory.createTestData();
+        const responseTests = await supertest(app).get("/tests").send(testsData)
+        expect(responseTests.status).toBe(401);
+    })
 })
 
 afterAll(async () => {
