@@ -14,7 +14,6 @@ export async function createTest(req: Request, res: Response){
 export async function getTests(req: Request, res: Response){
 
     const group: any = req.query.groupBy; 
-    console.log(group)
     
     if(group === "disciplines"){
         const tests = await testService.getTestByDiscipline();

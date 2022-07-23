@@ -41,7 +41,7 @@ async function getTestByDiscipline(){
             include: {
                 disciplines: {
                     include: {
-                        teacherDiscipline: {
+                        teacherDisciplines: {
                             include: {
                                 teacher: true,
                                 tests: {
