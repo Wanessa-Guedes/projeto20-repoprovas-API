@@ -7,10 +7,6 @@ beforeEach(async () => {
     await prisma.$executeRaw`TRUNCATE TABLE users;`;
 })
 
-afterEach(async () => {
-    await prisma.$executeRaw`DELETE FROM users WHERE email = 'teste@teste.com';`
-});
-
 describe("Auth tests", () => {
     
     it("Create User Success - Email, Password and CofirmPassword", async () => {
@@ -63,6 +59,5 @@ describe("Auth tests", () => {
 })
 
 afterAll(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE users;`;
     await prisma.$disconnect();
 });

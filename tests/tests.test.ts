@@ -10,10 +10,6 @@ beforeEach(async () => {
     await prisma.$executeRaw`TRUNCATE TABLE tests;`;
 });
 
-afterEach(async () => {
-    await prisma.$executeRaw`DELETE FROM users WHERE email = 'teste@teste.com';`
-});
-
 describe("Tests tests", () => {
     
     it("Create Test Success - name, pdfUrl, categoryId, teacherId, disciplineId correct insert", async () => {
@@ -210,7 +206,5 @@ describe("Tests tests", () => {
 })
 
 afterAll(async () => {
-    await prisma.$executeRaw`TRUNCATE TABLE tests;`;
-    await prisma.$executeRaw`TRUNCATE TABLE users;`;
     await prisma.$disconnect();
 });
